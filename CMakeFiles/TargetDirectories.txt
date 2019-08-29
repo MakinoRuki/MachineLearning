@@ -1,4 +1,0 @@
-/Users/ruki/Documents/Developer/MachineLearning/CMakeFiles/rebuild_cache.dir
-/Users/ruki/Documents/Developer/MachineLearning/CMakeFiles/edit_cache.dir
-/Users/ruki/Documents/Developer/MachineLearning/CMakeFiles/FMTest.dir
-/Users/ruki/Documents/Developer/MachineLearning/CMakeFiles/FMTrain.dir
