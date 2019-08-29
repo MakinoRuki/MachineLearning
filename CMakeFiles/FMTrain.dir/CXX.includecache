@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/ruki/Documents/Developer/MachineLearning/FM_train.cpp
+iostream
+-
+fstream
+-
+sstream
+-
+cstdio
+-
+cstring
+-
+string
+-
+random
+-
+cmath
+-
+

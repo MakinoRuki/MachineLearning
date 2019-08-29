@@ -5,6 +5,7 @@
 #include <cstring>
 #include <string>
 #include <random>
+#include <cmath>
 using namespace std;
 int n, m, k;
 double w0;
@@ -68,7 +69,8 @@ void RunTest() {
     }
     corweights *= 0.5;
     y1 += corweights;
-    cout<<"User score : "<<y1<<endl;
+    double y1s = 5.0 / (1.0 + exp(-y1));
+    cout<<"User score : "<<y1s<<endl;
 }
 int main() {
     bool status = ReadWeightsFile();

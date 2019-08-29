@@ -5,6 +5,7 @@
 #include <cstring>
 #include <string>
 #include <random>
+#include <cmath>
 using namespace std;
 vector<vector<double> > samples;
 int n, m, k;
@@ -50,7 +51,7 @@ void InitWeights() {
     k = 5;
     std::random_device rd;
     std::mt19937 gen(rd());
-    std::uniform_real_distribution<> range(0, 0);
+    std::uniform_real_distribution<> range(0.001, 0.005);
 
     for (int i = 0; i < m; ++i) {
         weights.push_back(range(gen));
@@ -100,11 +101,14 @@ void Train() {
         }
         corweights *= 0.5;
         y1 += corweights;
+        double y1s = 5.0 / (1.0 + exp(-y1));
         double y0 = samples[i][m];
       //  cout<<"y1="<<y1<<endl;
-        w0 -= alpha * (y1 - y0);
+        double sigd = exp(-y1) / ((1 + exp(-y1)) * (1 + exp(-y1)));
+        sigd *= 5.0;
+        w0 -= alpha * (y1s - y0) * sigd;
         for (int j = 0; j < m; ++j) {
-            weights[j] -= alpha * (y1 - y0) * samples[i][j];
+            weights[j] -= alpha * (y1s - y0) * sigd * samples[i][j];
             if (i == n-1)cout<<"j="<<weights[j]<<endl;
         }
         for (int a = 0; a < k; ++a) {
@@ -113,7 +117,7 @@ void Train() {
                 gradient += correlations[b][a] * samples[i][b];
             }
             for (int b = 0; b < m; ++b) {
-                correlations[b][a] -= alpha * (y1 - y0) * (samples[i][b] * gradient - correlations[b][a] * samples[i][b] * samples[i][b]);
+                correlations[b][a] -= alpha * (y1s - y0) * sigd * (samples[i][b] * gradient - correlations[b][a] * samples[i][b] * samples[i][b]);
                 //cout<<"cab : "<<correlations[b][a]<<endl;
             }
         }
